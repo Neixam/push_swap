@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data.c                                             :+:      :+:    :+:   */
+/*   operation.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/29 18:44:32 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/08 23:01:30 by ambouren         ###   ########.fr       */
+/*   Created: 2022/06/08 23:32:19 by ambouren          #+#    #+#             */
+/*   Updated: 2022/06/09 00:07:20 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef __OPERATION_H__
+#define __OPERATION_H__
+
 #include "data.h"
-#include "list.h"
 
-void ft_destroy_data(data_t *data)
-{
-	ft_destroy_lst(&data->stack_a);
-	ft_destroy_lst(&data->stack_b);
-}
+void sa(data_t *instance);
+void sb(data_t *instance);
+void ss(data_t *instance);
 
-data_t init_data(void)
-{
-	data_t ret;
+void pa(data_t *instance);
+void pb(data_t *instance);
 
-	ret.stack_a = 0;
-	ret.stack_b = 0;
-	ret.nb_enter = 0;
-	ret.max = 0;
-	ret.min = 0;
-	return (ret);
-}
+void ra(data_t *instance);
+void rb(data_t *instance);
+void rr(data_t *instance);
+
+void rra(data_t *instance);
+void rrb(data_t *instance);
+void rrr(data_t *instance);
+
+#endif

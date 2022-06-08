@@ -3,29 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 18:41:23 by ambouren          #+#    #+#             */
-/*   Updated: 2022/04/29 18:46:26 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/08 23:01:46 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __DATA_H__
-# define __DATA_H__
-# include "libft.h"
+#define __DATA_H__
+#include "list.h"
 
-typedef struct	s_data
+typedef struct data_s
 {
-	t_list	*stack_a;
-	t_list	*stack_b;
-	int		nb_enter;
-	int		max;
-	int		min;
-}				t_data;
+	list_t *stack_a;
+	list_t *stack_b;
+	int nb_enter;
+	int max;
+	int min;
+} data_t;
 
-t_data	init_data(void);
+data_t init_data(void);
 
-
-
+void ft_destroy_data(data_t *data);
 
 #endif

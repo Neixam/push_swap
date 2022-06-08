@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data.c                                             :+:      :+:    :+:   */
+/*   list.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/29 18:44:32 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/08 23:01:30 by ambouren         ###   ########.fr       */
+/*   Created: 2022/06/08 21:27:33 by ambouren          #+#    #+#             */
+/*   Updated: 2022/06/08 21:45:40 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "data.h"
-#include "list.h"
+#ifndef __LIST_H__
+#define __LIST_H__
 
-void ft_destroy_data(data_t *data)
+typedef struct list_s
 {
-	ft_destroy_lst(&data->stack_a);
-	ft_destroy_lst(&data->stack_b);
-}
+    int value;
+    struct list_s *next;
+} list_t;
 
-data_t init_data(void)
-{
-	data_t ret;
+list_t *ft_new_cell(int value);
 
-	ret.stack_a = 0;
-	ret.stack_b = 0;
-	ret.nb_enter = 0;
-	ret.max = 0;
-	ret.min = 0;
-	return (ret);
-}
+int ft_add_back(list_t **lst, int value);
+
+int ft_add_head(list_t **lst, int value);
+
+void ft_destroy_lst(list_t **lst);
+
+#endif

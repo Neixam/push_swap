@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/29 18:37:20 by ambouren          #+#    #+#             */
-/*   Updated: 2022/04/29 18:54:52 by ambouren         ###   ########.fr       */
+/*   Created: 2022/06/08 21:56:59 by ambouren          #+#    #+#             */
+/*   Updated: 2022/06/08 22:49:34 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef __PARSING_H__
+#define __PARSING_H__
 
-int	print_error(void)
-{
-	ft_putstr_fd("Error\n", 1);
-	return (1);
-}
+#include "data.h"
+
+int parsing(int ac, char **av, data_t *instance);
+
+#endif
