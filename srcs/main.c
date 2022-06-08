@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 18:11:21 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/09 00:44:13 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/09 00:48:29 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "parsing.h"
 #include <stdio.h>
 #include "list.h"
-#include "operation.h"
 
 void print_list(list_t *l)
 {
