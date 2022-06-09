@@ -6,12 +6,24 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 21:41:00 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/08 21:55:46 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/09 12:15:26 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 #include <stdlib.h>
+
+int ft_lstsize(list_t *lst)
+{
+    int len;
+
+    while (lst)
+    {
+        lst = lst->next;
+        len++;
+    }
+    return (len);
+}
 
 list_t *ft_new_cell(int value)
 {
@@ -21,6 +33,7 @@ list_t *ft_new_cell(int value)
     if (!ret)
         return (NULL);
     ret->value = value;
+    ret->id = 0;
     ret->next = NULL;
     return (ret);
 }

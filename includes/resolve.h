@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data.h                                             :+:      :+:    :+:   */
+/*   resolve.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/29 18:41:23 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/09 12:19:35 by ambouren         ###   ########.fr       */
+/*   Created: 2022/06/09 07:40:14 by ambouren          #+#    #+#             */
+/*   Updated: 2022/06/09 12:23:37 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __DATA_H__
-#define __DATA_H__
-#include "list.h"
+#ifndef __RESOLVE_H__
+#define __RESOLVE_H__
+#include "data.h"
 
-typedef struct data_s
-{
-	list_t *stack_a;
-	list_t *stack_b;
-	int nb_enter;
-	int max;
-	int min;
-} data_t;
+void start_resolve(data_t *instance);
 
-data_t init_data(void);
+void resolve_less_than_3(data_t *instance);
 
-void ft_destroy_data(data_t *data);
+void resolve_less_than_5(data_t *instance);
 
-int creat_radix_tab(data_t *data);
+int is_sort(data_t *instance);
 
 #endif

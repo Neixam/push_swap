@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 18:44:16 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/08 23:29:38 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/09 12:18:59 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ int ft_atoi(char *s, int *val)
 	long ret;
 	int neg;
 
-	while (ft_isblank(*s))
-		s++;
 	neg = 1;
 	if (*s == '+' || *s == '-')
 		if (*(s++) == '-')
 			neg = -1;
+	if ((*s <= 'z' && *s >= 'a') || (*s <= 'Z' && *s >= 'A'))
+		return (1);
 	ret = 0;
 	while (*s <= '9' && *s >= '0')
 	{
@@ -35,6 +35,8 @@ int ft_atoi(char *s, int *val)
 			return (1);
 		ret = ret * 10 + *(s++) - '0';
 	}
+	if ((*s <= 'z' && *s >= 'a') || (*s <= 'Z' && *s >= 'A'))
+		return (1);
 	*val = ret * neg;
 	return (0);
 }
@@ -69,6 +71,8 @@ int ft_isdup(data_t *instance)
 int add_all(list_t **stack, char **arg)
 {
 	int value;
+	int id;
+	list_t *tmp;
 
 	while (*arg)
 	{
@@ -76,6 +80,18 @@ int add_all(list_t **stack, char **arg)
 			return (1);
 		if (ft_add_back(stack, value))
 			return (1);
+		tmp = *stack;
+		id = 0;
+		while (tmp)
+		{
+			if (tmp->value > value)
+				tmp->id++;
+			else if (tmp->value == value)
+				tmp->id = id;
+			else
+				id++;
+			tmp = tmp->next;
+		}
 	}
 	return (0);
 }

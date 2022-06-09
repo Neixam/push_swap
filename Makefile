@@ -6,7 +6,7 @@
 #    By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/29 17:08:30 by ambouren          #+#    #+#              #
-#    Updated: 2022/06/08 23:49:36 by ambouren         ###   ########.fr        #
+#    Updated: 2022/06/09 08:22:54 by ambouren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,9 @@ SRC		=	main.c \
 			swap.c \
 			push.c \
 			rotate.c \
-			reverse_r.c
+			reverse_r.c \
+			resolve.c \
+			resolve_less_than.c
 DEP		=	$(addprefix $(DEP_PATH), $(SRC:.c=.d))
 OBJ		=	$(addprefix $(OBJ_PATH), $(SRC:.c=.o))
 

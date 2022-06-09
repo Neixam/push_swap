@@ -6,13 +6,14 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 18:11:21 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/09 00:48:29 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/09 13:14:04 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data.h"
 #include "utils.h"
 #include "parsing.h"
+#include "resolve.h"
 #include <stdio.h>
 #include "list.h"
 
@@ -31,6 +32,7 @@ int main(int ac, char **av)
 		return (print_error());
 	if (parsing(ac, av, &instance))
 		return (print_error());
+	start_resolve(&instance);
 	/*	printf("STACK A:\n");
 		print_list(instance.stack_a);
 		printf("STACK B:\n");
