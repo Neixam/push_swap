@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:46:05 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/09 14:42:11 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/09 18:22:58 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void radix_resolve(data_t *instance)
     }
 }
 
-#include <stdio.h>
 int median(data_t *instance, int n)
 {
     list_t *tmp;
@@ -88,35 +87,53 @@ int median(data_t *instance, int n)
             else
                 dist = n / 2 - med->id;
         }
+		tmp->id = 0;
         tmp = tmp->next;
     }
     return (med->value);
 }
 
+void reload_med(data_t *instance, int val)
+{
+	list_t *tmp;
+	int id;
+
+	id = 0;
+	tmp = instance->stack_b;
+	while (tmp)
+	{
+		if (tmp->value > val)
+			tmp->id++;
+		else
+			id++;
+		tmp = tmp->next;
+	}
+	pb(instance);
+	instance->stack_b->id = id;
+}
+
 void quick_sort(data_t *instance, int n)
 {
-    int med;
     int i;
+	int med;
     int half_len;
 
     if (n <= 1)
         return;
-    med = median(instance, n);
     i = 0;
     half_len = 0;
+	med = median(instance, n);
     while (i < n)
     {
-        printf("%d\n", instance->stack_a->value);
-        if (instance->stack_a->value >= med)
+        if (instance->stack_a->value <= med)
         {
-            pb(instance);
+			reload_med(instance, instance->stack_a->value);
             half_len++;
         }
         else
             ra(instance);
         i++;
     }
-    printf("MED=%d, N=%d, H=%d\n", med, n, half_len);
     i = 0;
     while (i++ < n - half_len)
         rra(instance);
