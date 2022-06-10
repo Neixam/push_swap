@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 21:27:33 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/09 11:33:04 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/10 18:11:46 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ list_t *ft_new_cell(int value);
 
 int ft_add_back(list_t **lst, int value);
 
-int ft_add_head(list_t **lst, int value);
+int		ft_add_head(list_t **lst, int value);
 
-void ft_destroy_lst(list_t **lst);
+void	ft_destroy_lst(list_t **lst);
 
-int ft_lstsize(list_t *lst);
+void	ft_lstmxmn(list_t *lst, int *max, int *min);
 
 #endif

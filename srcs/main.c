@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 18:11:21 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/09 18:23:08 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/10 18:22:20 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ int main(int ac, char **av)
 	if (parsing(ac, av, &instance))
 		return (print_error());
 	start_resolve(&instance);
-	printf("STACK A:\n");
+/*	printf("STACK A:\n");
 		print_list(instance.stack_a);
 		printf("STACK B:\n");
 		print_list(instance.stack_b);
 		printf("MAX=%d, MIN=%d, SIZE=%d\n", instance.max, instance.min, instance.nb_enter);
-	ft_destroy_data(&instance);
+*/	ft_destroy_data(&instance);
 	return (0);
 }
