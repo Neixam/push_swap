@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:46:05 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/10 18:42:02 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/11 19:50:15 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,6 @@
 #include "list.h"
 #include "operation.h"
 #include <stdlib.h>
-
-int is_sort(data_t *instance)
-{
-    list_t *tmp;
-
-    tmp = instance->stack_a;
-    while (tmp && tmp->next)
-    {
-        if (tmp->value > tmp->next->value)
-            return (0);
-        tmp = tmp->next;
-    }
-    return (1);
-}
 
 int is_resolve(data_t *instance)
 {
@@ -37,117 +23,58 @@ int is_resolve(data_t *instance)
     return (is_sort(instance));
 }
 
-void radix_resolve(data_t *instance)
+int	find_rchunk(list_t *lst, int min, int max, int *ret)
 {
-    int decal;
-    int i;
+	int	nb;
 
-    decal = 0;
-    while (((instance->nb_enter - 1) >> decal) > 0 && !is_sort(instance))
-    {
-        i = 0;
-        while (i++ < instance->nb_enter && instance->stack_a)
-        {
-            if ((instance->stack_a->id >> decal) & 1)
-                ra(instance);
-            else
-                pb(instance);
-        }
-        while (instance->stack_b)
-            pa(instance);
-        decal++;
-    }
+	if (!lst)
+		return (0);
+	nb = find_rchunk(lst->next, min, max, ret);
+	if (*ret)
+		return (nb);
+	if (lst->value >= min && lst->value < max)
+		*ret = 1;
+	return (nb + 1);
 }
 
-int median(data_t *instance, int n)
+int find_chunk(list_t *lst, int min, int max)
 {
-    list_t *tmp;
-    list_t *med;
-    int dist;
-    int i;
+	int nb;
+	int nb2;
+	int ret;
 
-    tmp = instance->stack_a;
-    med = tmp;
-    if (med->id >= n / 2)
-        dist = med->id - n / 2;
-    else
-        dist = n / 2 - med->id;
-    i = 0;
-    while (tmp && i < n)
-    {
-        i++;
-        if ((tmp->id <= n / 2 &&
-             n / 2 - tmp->id < dist) ||
-            (tmp->id >= n / 2 &&
-             tmp->id - n / 2 < dist))
-        {
-            med = tmp;
-            if (med->id >= n / 2)
-                dist = med->id - n / 2;
-            else
-                dist = n / 2 - med->id;
-        }
-		tmp->id = 0;
-        tmp = tmp->next;
-    }
-    return (med->value);
-}
-
-void reload_med(data_t *instance, int val)
-{
-	list_t *tmp;
-	int id;
-
-	id = 0;
-	tmp = instance->stack_b;
-	while (tmp)
+	ret = 0;
+	nb2 = find_rchunk(lst, min, max, &ret);
+	nb = 0;
+	while (lst)
 	{
-		if (tmp->value > val)
-			tmp->id++;
-		else
-			id++;
-		tmp = tmp->next;
+		if (lst->value >= min && lst->value < max)
+			break;
+		nb++;
+		lst = lst->next;
 	}
-	pb(instance);
-	instance->stack_b->id = id;
+	if (nb < nb2)
+		return (nb);
+	else
+		return (-nb2);
 }
 
-void quick_sort(data_t *instance, int n)
+void insert_sort(data_t *instance)
 {
-    int i;
-	int med;
-    int half_len;
+	int	size_chunk;
+	int	size;
 
-    if (n <= 1)
-        return;
-    i = 0;
-    half_len = 0;
-	med = median(instance, n);
-    while (i < n)
-    {
-        if (instance->stack_a->value <= med)
-        {
-			reload_med(instance, instance->stack_a->value);
-            half_len++;
-        }
-        else
-            ra(instance);
-        i++;
-    }
-    i = 0;
-    while (i++ < n - half_len)
-        rra(instance);
-    i = 0;
-    while (i++ < half_len)
-        pa(instance);
-    quick_sort(instance, half_len);
-    i = 0;
-    while (i++ < half_len)
-        ra(instance);
-    quick_sort(instance, n - half_len);
-    i = 0;
-    while (i++ < half_len)
-        rra(instance);
+	size_chunk = instance->nb_enter / 5;
+	size = instance->nb_enter;
+	while (instance->stack_a)
+	{
+		if (size == 1)
+			break;
+		push_pos(instance, find_chunk(instance->stack_a, ));
+		size--;
+	}
+	while (instance->stack_b)
+		pa(instance);
 }
 
 void start_resolve(data_t *instance)
@@ -156,6 +83,9 @@ void start_resolve(data_t *instance)
         return;
     if (instance->nb_enter <= 5)
         return (resolve_less_than_5(instance));
-    // radix_resolve(instance);
-    quick_sort(instance, instance->nb_enter);
+    if (instance->nb_enter <= 64)
+		return radix_resolve(instance);
+	if (instance->nb_enter < 500)
+		return insert_sort(instance);
+	insert_sort500(instance);
 }

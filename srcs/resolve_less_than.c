@@ -6,13 +6,29 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:53:26 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/10 18:18:09 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/11 18:42:28 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "resolve.h"
 #include "operation.h"
+/*
+#include <stdio.h>
+void print_list(list_t *l)
+{
+	for (; l; l = l->next)
+		printf("%d%s", l->value, (l->next) ? ", " : "\n");
+}
 
+void printlet(data_t instance)
+{
+	printf("STACK A:\n");
+		print_list(instance.stack_a);
+		printf("STACK B:\n");
+		print_list(instance.stack_b);
+		printf("MAX=%d, MIN=%d, SIZE=%d\n", instance.max, instance.min, instance.nb_enter);
+}
+*/
 void resolve_less_than_3(data_t *instance)
 {
 	if (is_sort(instance))
@@ -34,7 +50,7 @@ void resolve_less_than_3(data_t *instance)
 	ra(instance);
 }
 
-int push_value(list_t *lst, int val)
+int find_value(list_t *lst, int val)
 {
 	int rotate;
 
@@ -74,14 +90,14 @@ void insert_borne(data_t *instance)
 
 	if (instance->nb_enter == 5)
 	{
-		max = push_value(instance->stack_a, instance->max);
+		max = find_value(instance->stack_a, instance->max);
 		if (max >= instance->nb_enter / 2)
 			max -= instance->nb_enter;
 		push_pos(instance, max);
 	}
-	min = push_value(instance->stack_a, instance->min);
+	min = find_value(instance->stack_a, instance->min);
 	if (min > instance->nb_enter / 2)
-		min -= instance->nb_enter;
+		min -= ft_lstsize(instance->stack_a);
 	push_pos(instance, min);
 }
 

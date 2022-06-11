@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 21:27:33 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/10 18:11:46 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/11 18:27:58 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ int		ft_add_head(list_t **lst, int value);
 
 void	ft_destroy_lst(list_t **lst);
 
-void	ft_lstmxmn(list_t *lst, int *max, int *min);
+int		ft_lstsize(list_t *lst);
 
 #endif
