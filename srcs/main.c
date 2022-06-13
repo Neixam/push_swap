@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 18:11:21 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/11 18:22:43 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/13 14:37:31 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ int main(int ac, char **av)
 	if (ac < 1)
 		return (print_error());
 	if (parsing(ac, av, &instance))
+	{
+		ft_destroy_data(&instance);
 		return (print_error());
+	}
 	start_resolve(&instance);
 	ft_destroy_data(&instance);
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   radix_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 19:13:00 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/11 19:14:36 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/13 18:24:37 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,30 @@ int is_sort(data_t *instance)
     return (1);
 }
 
-void radix_resolve(data_t *instance)
+void go_to(data_t *instance, int pos, int aob)
+{
+    while (pos != 0)
+    {
+        if (pos > 0)
+        {
+            if (aob == A)
+                ra(instance);
+            else
+                rb(instance);
+            pos--;
+        }
+        else
+        {
+            if (aob == A)
+                rra(instance);
+            else
+                rrb(instance);
+            pos++;
+        }
+    }
+}
+
+void radix_sort(data_t *instance)
 {
     int decal;
     int i;

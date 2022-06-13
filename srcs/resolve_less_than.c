@@ -6,29 +6,13 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:53:26 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/11 18:42:28 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/13 18:27:38 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "resolve.h"
 #include "operation.h"
-/*
-#include <stdio.h>
-void print_list(list_t *l)
-{
-	for (; l; l = l->next)
-		printf("%d%s", l->value, (l->next) ? ", " : "\n");
-}
 
-void printlet(data_t instance)
-{
-	printf("STACK A:\n");
-		print_list(instance.stack_a);
-		printf("STACK B:\n");
-		print_list(instance.stack_b);
-		printf("MAX=%d, MIN=%d, SIZE=%d\n", instance.max, instance.min, instance.nb_enter);
-}
-*/
 void resolve_less_than_3(data_t *instance)
 {
 	if (is_sort(instance))
@@ -67,26 +51,14 @@ int find_value(list_t *lst, int val)
 
 void push_pos(data_t *instance, int pos)
 {
-	while (pos != 0)
-	{
-		if (pos > 0)
-		{
-			ra(instance);
-			pos--;
-		}
-		else
-		{
-			rra(instance);
-			pos++;
-		}
-	}
+	go_to(instance, pos, A);
 	pb(instance);
 }
 
 void insert_borne(data_t *instance)
 {
-	int	min;
-	int	max;
+	int min;
+	int max;
 
 	if (instance->nb_enter == 5)
 	{

@@ -6,11 +6,12 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 22:01:20 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/08 23:42:32 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/13 19:44:58 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
+#include "list.h"
 #include <unistd.h>
 #include <stdlib.h>
 
@@ -49,4 +50,21 @@ int ft_isblank(int c)
 {
     return (c == '\n' || c == '\t' || c == ' ' ||
             c == '\r' || c == '\f' || c == '\v');
+}
+
+int ft_lstmm(list_t *lst, int *min, int *max)
+{
+    if (!lst)
+        return (1);
+    *min = lst->value;
+    *max = lst->value;
+    while (lst)
+    {
+        if (lst->value < *min)
+            *min = lst->value;
+        if (lst->value > *max)
+            *max = lst->value;
+        lst = lst->next;
+    }
+    return (0);
 }

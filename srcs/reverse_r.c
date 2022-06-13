@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:38:50 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/09 00:28:32 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/13 20:10:52 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void rra(data_t *instance)
     list_t *ant;
 
     tmp = instance->stack_a;
+    if (!tmp || !tmp->next)
+        return;
     while (tmp && tmp->next)
         tmp = tmp->next;
     ant = instance->stack_a;
@@ -36,6 +38,8 @@ void rrb(data_t *instance)
     list_t *ant;
 
     tmp = instance->stack_b;
+    if (!tmp || !tmp->next)
+        return;
     while (tmp && tmp->next)
         tmp = tmp->next;
     ant = instance->stack_b;

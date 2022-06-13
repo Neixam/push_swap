@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   abs.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/29 18:53:39 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/13 18:21:49 by ambouren         ###   ########.fr       */
+/*   Created: 2022/06/13 18:10:52 by ambouren          #+#    #+#             */
+/*   Updated: 2022/06/13 18:21:25 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __UTILS_H__
-#define __UTILS_H__
+#include "utils.h"
 
-#include <stddef.h>
-
-int print_error(void);
-
-size_t ft_strlen(const char *s1);
-
-char *ft_strdup(const char *s1);
-
-char **ft_split(char const *s, char c);
-
-int ft_isblank(int c);
-
-long ft_abs(int n);
-
-#endif
+long ft_abs(int i)
+{
+    if (i < 0)
+        return (-((long)i));
+    return (i);
+}

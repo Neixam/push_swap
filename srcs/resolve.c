@@ -6,75 +6,140 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:46:05 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/11 19:50:15 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/13 20:56:19 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "resolve.h"
 #include "list.h"
 #include "operation.h"
+#include "utils.h"
 #include <stdlib.h>
+
+#include <stdio.h>
+void print_list(list_t *l)
+{
+    for (; l; l = l->next)
+        fprintf(stderr, "%d:%d%s", l->id, l->value, (l->next) ? ", " : "\n");
+}
+
+void printlet(data_t instance)
+{
+    fprintf(stderr, "STACK A:\n");
+    print_list(instance.stack_a);
+    fprintf(stderr, "STACK B:\n");
+    print_list(instance.stack_b);
+    fprintf(stderr, "MAX=%d, MIN=%d, SIZE=%d\n", instance.max, instance.min, instance.nb_enter);
+}
 
 int is_resolve(data_t *instance)
 {
-
     if (instance->nb_enter <= 1)
         return (1);
     return (is_sort(instance));
 }
 
-int	find_rchunk(list_t *lst, int min, int max, int *ret)
+int find_rchunk(list_t *lst, int min, int max, int *ret)
 {
-	int	nb;
+    int nb;
 
-	if (!lst)
-		return (0);
-	nb = find_rchunk(lst->next, min, max, ret);
-	if (*ret)
-		return (nb);
-	if (lst->value >= min && lst->value < max)
-		*ret = 1;
-	return (nb + 1);
+    if (!lst)
+        return (0);
+    nb = find_rchunk(lst->next, min, max, ret);
+    if (*ret)
+        return (nb);
+    if (lst->id >= min && lst->id < max)
+        *ret = 1;
+    return (nb + 1);
 }
 
 int find_chunk(list_t *lst, int min, int max)
 {
-	int nb;
-	int nb2;
-	int ret;
+    int nb;
+    int nb2;
+    int ret;
 
-	ret = 0;
-	nb2 = find_rchunk(lst, min, max, &ret);
-	nb = 0;
-	while (lst)
-	{
-		if (lst->value >= min && lst->value < max)
-			break;
-		nb++;
-		lst = lst->next;
-	}
-	if (nb < nb2)
-		return (nb);
-	else
-		return (-nb2);
+    ret = 0;
+    nb2 = find_rchunk(lst, min, max, &ret);
+    nb = 0;
+    while (lst)
+    {
+        if (lst->id >= min && lst->id < max)
+            break;
+        nb++;
+        lst = lst->next;
+    }
+    if (nb < nb2)
+        return (nb);
+    else
+        return (-nb2);
 }
 
-void insert_sort(data_t *instance)
+int find_appro(list_t *lst, int val)
 {
-	int	size_chunk;
-	int	size;
+    int pos;
+    int valpos;
+    int i;
 
-	size_chunk = instance->nb_enter / 5;
-	size = instance->nb_enter;
-	while (instance->stack_a)
-	{
-		if (size == 1)
-			break;
-		push_pos(instance, find_chunk(instance->stack_a, ));
-		size--;
-	}
-	while (instance->stack_b)
-		pa(instance);
+    i = 0;
+    pos = i;
+    valpos = lst->value;
+    while (lst)
+    {
+        if (ft_abs(lst->value - val) < ft_abs(valpos - val))
+        {
+            pos = i;
+            valpos = lst->value;
+        }
+        i++;
+        lst = lst->next;
+    }
+    if (valpos > val)
+        pos++;
+    return (pos);
+}
+
+void setup_b(data_t *instance, int pushs)
+{
+    int min;
+    int max;
+    int pos;
+
+    if (pushs < 2)
+        return (pb(instance));
+    ft_lstmm(instance->stack_b, &min, &max);
+    if (instance->stack_a->value < min)
+        pos = find_value(instance->stack_b, min) + 1;
+    else if (instance->stack_a->value > max)
+        pos = find_value(instance->stack_b, max);
+    else
+        pos = find_appro(instance->stack_b, instance->stack_a->value);
+    if (pos >= pushs / 2)
+        pos -= pushs;
+    go_to(instance, pos, B);
+    pb(instance);
+}
+
+void insert_sort(data_t *instance, int part)
+{
+    int size_chunk;
+    int pushs;
+    int num_chunk;
+
+    size_chunk = instance->nb_enter / part;
+    num_chunk = 0;
+    pushs = 0;
+    while (instance->stack_a)
+    {
+        go_to(instance, find_chunk(instance->stack_a, size_chunk * num_chunk, size_chunk * (num_chunk + 1)), A);
+        setup_b(instance, pushs);
+        pushs++;
+        if (pushs % size_chunk == 0)
+            num_chunk++;
+    }
+    go_to(instance, find_value(instance->stack_b, instance->max), B);
+    while (instance->stack_b)
+        pa(instance);
 }
 
 void start_resolve(data_t *instance)
@@ -84,8 +149,8 @@ void start_resolve(data_t *instance)
     if (instance->nb_enter <= 5)
         return (resolve_less_than_5(instance));
     if (instance->nb_enter <= 64)
-		return radix_resolve(instance);
-	if (instance->nb_enter < 500)
-		return insert_sort(instance);
-	insert_sort500(instance);
+        return (radix_sort(instance));
+    if (instance->nb_enter < 500)
+        return (insert_sort(instance, 6));
+    insert_sort(instance, 11);
 }
