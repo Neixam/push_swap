@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:46:05 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/13 20:56:19 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/14 15:01:14 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,11 @@
 #include "utils.h"
 #include <stdlib.h>
 
-#include <stdio.h>
-void print_list(list_t *l)
-{
-    for (; l; l = l->next)
-        fprintf(stderr, "%d:%d%s", l->id, l->value, (l->next) ? ", " : "\n");
-}
-
-void printlet(data_t instance)
-{
-    fprintf(stderr, "STACK A:\n");
-    print_list(instance.stack_a);
-    fprintf(stderr, "STACK B:\n");
-    print_list(instance.stack_b);
-    fprintf(stderr, "MAX=%d, MIN=%d, SIZE=%d\n", instance.max, instance.min, instance.nb_enter);
-}
-
 int is_resolve(data_t *instance)
 {
     if (instance->nb_enter <= 1)
         return (1);
-    return (is_sort(instance));
+    return (is_sort(instance, A, ascending, instance->nb_enter));
 }
 
 int find_rchunk(list_t *lst, int min, int max, int *ret)
@@ -148,9 +132,10 @@ void start_resolve(data_t *instance)
         return;
     if (instance->nb_enter <= 5)
         return (resolve_less_than_5(instance));
-    if (instance->nb_enter <= 64)
-        return (radix_sort(instance));
-    if (instance->nb_enter < 500)
-        return (insert_sort(instance, 6));
-    insert_sort(instance, 11);
+    /*   if (instance->nb_enter <= 64)
+           return (radix_sort(instance));
+           if (instance->nb_enter < 500)
+               return (insert_sort(instance, 6));
+           insert_sort(instance, 11);*/
+    quick_sort_a(instance, instance->nb_enter);
 }

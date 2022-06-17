@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data.h                                             :+:      :+:    :+:   */
+/*   comparing.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/29 18:41:23 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/14 12:48:33 by ambouren         ###   ########.fr       */
+/*   Created: 2022/06/14 13:13:18 by ambouren          #+#    #+#             */
+/*   Updated: 2022/06/14 13:15:52 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __DATA_H__
-#define __DATA_H__
 #include "list.h"
-#define A 354
-#define B 212
-typedef struct data_s
+
+int descending(list_t *n1, list_t *n2)
 {
-	list_t *stack_a;
-	list_t *stack_b;
-	int nb_enter;
-	int max;
-	int min;
-} data_t;
+    return (n1->value > n2->value);
+}
 
-data_t init_data(void);
-
-void ft_destroy_data(data_t *data);
-
-int creat_radix_tab(data_t *data);
-
-#endif
+int ascending(list_t *n1, list_t *n2)
+{
+    return (n1->value < n2->value);
+}

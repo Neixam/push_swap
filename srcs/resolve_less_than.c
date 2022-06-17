@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:53:26 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/13 18:27:38 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/14 15:01:44 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void resolve_less_than_3(data_t *instance)
 {
-	if (is_sort(instance))
+	if (is_sort(instance, A, ascending, instance->nb_enter))
 		return;
 	if (instance->nb_enter == 2)
 		return (sa(instance));
