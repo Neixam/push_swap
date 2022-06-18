@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:37:14 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/18 12:51:48 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/18 14:16:26 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,7 @@ int is_statement_in(int val, int aob)
     if ((aob == A && val == SA) ||
         (aob == B && val == SB))
         return (SS);
-    if ((aob == A && val == PB) ||
-        (aob == B && val == PB))
-        return (PB);
-    if ((aob == A && val == PA) ||
-        (aob == B && val == PA))
-        return (PA);
+    if (val == PB || val == PA)
+        return (val);
     return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 09:31:38 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/18 13:07:19 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/18 15:14:19 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,24 @@ void opti_double(list_t **instrs, list_t **pos, int flag)
     }
 }
 
+void opti_ss(list_t **instrs, list_t **pos, int flag)
+{
+    list_t *tmp;
+
+    tmp = (*pos)->next;
+    while (tmp && !is_statement_in(tmp->value, flag & 3) && !is_rotate_in(tmp->value, flag & 3))
+    {
+        if (((is_statement(tmp->value) & 3) != (flag & 3)) &&
+            ((is_statement(tmp->value) >> 4) == (flag >> 4)))
+        {
+            (*pos)->value = flag >> 4;
+            delete_instr(instrs, &tmp);
+            return;
+        }
+        tmp = tmp->next;
+    }
+}
+
 void opti_push(list_t **instrs, list_t **pos, int flag)
 {
     list_t *tmp;
@@ -99,9 +117,9 @@ void opti_push(list_t **instrs, list_t **pos, int flag)
 
     tmp = *pos;
     if (flag >> 4 == PA)
-        inv = (PB << 4);
+        inv = PB;
     else
-        inv = (PA << 4);
+        inv = PA;
     while (tmp && !is_rotate(tmp->value) && is_statement(tmp->value) == flag)
         tmp = tmp->next;
     if (tmp && (is_statement(tmp->value) >> 4) == inv)
@@ -125,9 +143,9 @@ void opti_instr(list_t **instrs)
     tmp = *instrs;
     while (tmp)
     {
-        if (is_statement(tmp->value) >> 4 == SS)
+        if ((is_statement(tmp->value) >> 4) == SS)
             opti_swap(instrs, &tmp, is_statement(tmp->value));
-        else if (is_statement(tmp->value) >> 4 != SS)
+        else if ((is_statement(tmp->value) >> 4) != SS)
             opti_push(instrs, &tmp, is_statement(tmp->value));
         tmp = tmp->next;
     }
@@ -136,6 +154,8 @@ void opti_instr(list_t **instrs)
     {
         if (is_rotate(tmp->value))
             opti_double(instrs, &tmp, is_rotate(tmp->value));
+		else if ((is_statement(tmp->value) >> 4) == SS)
+			opti_ss(instrs, &tmp, is_statement(tmp->value));
         tmp = tmp->next;
     }
 }

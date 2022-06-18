@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:46:05 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/18 10:36:19 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/18 17:20:35 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,13 +131,13 @@ void start_resolve(data_t *instance)
     if (is_resolve(instance))
         return;
     if (instance->nb_enter <= 5)
+	{
         return (resolve_less_than_5(instance));
-    /*   if (instance->nb_enter <= 64)
-           return (radix_sort(instance));
-           if (instance->nb_enter < 500)
-               return (insert_sort(instance, 6));
-           insert_sort(instance, 11);*/
-    quick_sort_a(instance, instance->nb_enter);
+	}
+	if (instance->nb_enter <= 100)
+    	insert_sort(instance, 6);
+	else
+    	quick_sort_a(instance, instance->nb_enter);
     opti_instr(&instance->st_instr);
     print_instr(instance->st_instr);
 }
