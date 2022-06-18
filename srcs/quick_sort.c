@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 12:39:41 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/18 07:06:36 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/18 08:16:21 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ void sort_less_than_3(data_t *instance, int len)
     { // 2 1 3 || 3 2 1 || 3 1 2
         if (instance->stack_a->next->value > instance->stack_a->next->next->value)
         { // 3 2 1
-            fprintf(stderr, "SORT 3 2 1\n");
-            printlet(*instance);
             pb(instance);
             sa(instance);
             ra(instance);
@@ -50,55 +48,37 @@ void sort_less_than_3(data_t *instance, int len)
             pa(instance);
             rra(instance);
             rra(instance);
-            printlet(*instance);
-            scanf("%d", &len);
         }
         else if (instance->stack_a->value > instance->stack_a->next->next->value)
         { // 3 1 2
-            fprintf(stderr, "SORT 3 1 2\n");
-            printlet(*instance);
             ra(instance);
             pb(instance);
             pb(instance);
             rra(instance);
             pa(instance);
             pa(instance);
-            printlet(*instance);
-            scanf("%d", &len);
         }
         else
         { // 2 1 3
-            fprintf(stderr, "SORT 2 1 3\n");
-            printlet(*instance);
             sa(instance);
-            printlet(*instance);
-            scanf("%d", &len);
         }
     }
     else
     { // 1 3 2 || 2 3 1
         if (instance->stack_a->value < instance->stack_a->next->next->value)
         { // 1 3 2
-            fprintf(stderr, "SORT 1 3 2\n");
-            printlet(*instance);
             pb(instance);
             sa(instance);
             pa(instance);
-            printlet(*instance);
-            scanf("%d", &len);
         }
         else
         { // 2 3 1
-            fprintf(stderr, "SORT 2 3 1\n");
-            printlet(*instance);
             ra(instance);
             ra(instance);
             pb(instance);
             rra(instance);
             rra(instance);
             pa(instance);
-            printlet(*instance);
-            scanf("%d", &len);
         }
     }
 }
@@ -111,73 +91,53 @@ void push_less_than_3(data_t *instance, int len)
     {
         if (instance->stack_b->value < instance->stack_b->next->value)
             sb(instance);
-        pb(instance);
-        return (pb(instance));
+        pa(instance);
+        return (pa(instance));
     }
     if (instance->stack_b->value < instance->stack_b->next->value)
     { // 1 2 3 || 1 3 2 || 2 3 1
         if (instance->stack_b->next->value < instance->stack_b->next->next->value)
         { // 1 2 3
-            fprintf(stderr, "PUSH 1 2 3\n");
-            printlet(*instance);
             rb(instance);
             sb(instance);
             pa(instance);
             pa(instance);
             rrb(instance);
             pa(instance);
-            printlet(*instance);
-            scanf("%d", &len);
         }
         else if (instance->stack_b->value > instance->stack_b->next->next->value)
         { // 2 3 1
-            fprintf(stderr, "PUSH 2 3 1\n");
-            printlet(*instance);
             sb(instance);
             pa(instance);
             pa(instance);
             pa(instance);
-            printlet(*instance);
-            scanf("%d", &len);
         }
         else
         { // 1 3 2
-            fprintf(stderr, "PUSH 1 3 2\n");
-            printlet(*instance);
             rb(instance);
             pa(instance);
             pa(instance);
             rrb(instance);
             pa(instance);
-            printlet(*instance);
-            scanf("%d", &len);
         }
     }
     else
     { // 3 1 2 || 2 1 3
         if (instance->stack_b->value < instance->stack_b->next->next->value)
         { // 2 1 3
-            fprintf(stderr, "PUSH 2 1 3\n");
-            printlet(*instance);
             rb(instance);
             sb(instance);
             pa(instance);
             rrb(instance);
             pa(instance);
             pa(instance);
-            printlet(*instance);
-            scanf("%d", &len);
         }
         else
         { // 3 1 2
-            fprintf(stderr, "PUSH 3 1 2\n");
-            printlet(*instance);
             pa(instance);
             sb(instance);
             pa(instance);
             pa(instance);
-            printlet(*instance);
-            scanf("%d", &len);
         }
     }
 }
@@ -215,12 +175,14 @@ void quick_sort_b(data_t *instance, int len)
 
     if (is_sort(instance, B, descending, len))
     {
-        fprintf(stderr, "IS SORTED B\n");
-        printlet(*instance);
+        if (is_sort(instance, B, descending, instance->nb_enter + 1))
+        {
+            while (instance->stack_b)
+                pa(instance);
+            return;
+        }
         while (len--)
             pa(instance);
-        printlet(*instance);
-        scanf("%d", &i);
         return;
     }
     if (len <= 3)
@@ -251,12 +213,7 @@ void quick_sort_a(data_t *instance, int len)
     int rot;
 
     if (is_sort(instance, A, ascending, len))
-    {
-        fprintf(stderr, "IS SORTED A\n");
-        printlet(*instance);
-        scanf("%d", &i);
         return;
-    }
     if (len <= 3)
         return (sort_less_than_3(instance, len));
     if (len != instance->nb_enter)
@@ -278,9 +235,4 @@ void quick_sort_a(data_t *instance, int len)
             rra(instance);
     quick_sort_a(instance, len / 2 + len % 2);
     quick_sort_b(instance, len / 2);
-    if (instance->nb_enter == len)
-    {
-        printlet(*instance);
-        scanf("%d", &i);
-    }
 }
