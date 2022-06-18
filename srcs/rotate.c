@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:38:04 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/09 00:42:03 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/18 11:45:21 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void ra(data_t *instance)
     tmp->next = instance->stack_a;
     instance->stack_a = instance->stack_a->next;
     tmp2->next = 0;
-    write(1, "ra\n", 3);
+    ft_add_back(&instance->st_instr, RA);
+    // write(1, "ra\n", 3);
 }
 
 void rb(data_t *instance)
@@ -40,7 +41,8 @@ void rb(data_t *instance)
     tmp->next = instance->stack_b;
     instance->stack_b = instance->stack_b->next;
     tmp2->next = 0;
-    write(1, "rb\n", 3);
+    ft_add_back(&instance->st_instr, RB);
+    // write(1, "rb\n", 3);
 }
 
 void rr(data_t *instance)
@@ -62,5 +64,24 @@ void rr(data_t *instance)
     tmp->next = instance->stack_a;
     instance->stack_a = instance->stack_a->next;
     tmp2->next = 0;
-    write(1, "rr\n", 3);
+    ft_add_back(&instance->st_instr, RR);
+    // write(1, "rr\n", 3);
+}
+
+int is_rotate(int val)
+{
+    if (is_rotate_in(val, A))
+        return ((is_rotate_in(val, A) << 4) | A);
+    if (is_rotate_in(val, B))
+        return ((is_rotate_in(val, B) << 4) | B);
+    return (0);
+}
+
+int is_statement(int val)
+{
+    if (is_statement_in(val, A))
+        return ((is_statement_in(val, A) << 4) | A);
+    if (is_statement_in(val, B))
+        return ((is_statement_in(val, B) << 4) | B);
+    return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 18:44:16 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/09 12:18:59 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/18 11:00:06 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int add_all(list_t **stack, char **arg)
 int parsing(int ac, char **av, data_t *instance)
 {
 	int i;
+	int j;
 	char **arg;
 
 	i = 0;
@@ -112,6 +113,9 @@ int parsing(int ac, char **av, data_t *instance)
 			free(arg);
 			return (1);
 		}
+		j = 0;
+		while (arg[j])
+			free(arg[j++]);
 		free(arg);
 	}
 	if (ft_isdup(instance))

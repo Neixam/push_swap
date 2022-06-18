@@ -6,17 +6,30 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:32:19 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/14 12:50:10 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/18 10:35:59 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __OPERATION_H__
 #define __OPERATION_H__
 #include "data.h"
-#define SWAP(x, y) (y == A) ? sa(x) : sb(x)
-#define ROT(x, y) (y == A) ? ra(x) : rb(x)
-#define RROT(x, y) (y == A) ? rra(x) : rrb(x)
-#define PUSH(x, y) (y == A) ? pa(x) : pb(x)
+#define A 1
+#define B 2
+
+typedef enum intr_e
+{
+    SA,
+    SB,
+    SS,
+    PA,
+    PB,
+    RA,
+    RB,
+    RR,
+    RRA,
+    RRB,
+    RRR
+} instr_t;
 
 void sa(data_t *instance);
 void sb(data_t *instance);
@@ -32,5 +45,13 @@ void rr(data_t *instance);
 void rra(data_t *instance);
 void rrb(data_t *instance);
 void rrr(data_t *instance);
+
+int is_rotate_in(int val, int aob);
+int is_rotate(int val);
+int is_statement_in(int val, int aob);
+int is_statement(int val);
+
+void opti_instr(list_t **instrs);
+void print_instr(list_t *l);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:37:14 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/09 00:31:54 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/18 12:51:48 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void pa(data_t *instance)
     instance->stack_b = instance->stack_b->next;
     tmp->next = instance->stack_a;
     instance->stack_a = tmp;
-    write(1, "pa\n", 3);
+    ft_add_back(&instance->st_instr, PA);
+    // write(1, "pa\n", 3);
 }
 
 void pb(data_t *instance)
@@ -37,5 +38,31 @@ void pb(data_t *instance)
     instance->stack_a = instance->stack_a->next;
     tmp->next = instance->stack_b;
     instance->stack_b = tmp;
-    write(1, "pb\n", 3);
+    ft_add_back(&instance->st_instr, PB);
+    // write(1, "pb\n", 3);
+}
+
+int is_rotate_in(int val, int aob)
+{
+    if ((aob == A && val == RA) ||
+        (aob == B && val == RB))
+        return (RR);
+    if ((aob == A && val == RRA) ||
+        (aob == B && val == RRB))
+        return (RRR);
+    return (0);
+}
+
+int is_statement_in(int val, int aob)
+{
+    if ((aob == A && val == SA) ||
+        (aob == B && val == SB))
+        return (SS);
+    if ((aob == A && val == PB) ||
+        (aob == B && val == PB))
+        return (PB);
+    if ((aob == A && val == PA) ||
+        (aob == B && val == PA))
+        return (PA);
+    return (0);
 }

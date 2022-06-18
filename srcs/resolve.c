@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:46:05 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/14 15:01:14 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/18 10:36:19 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,4 +138,6 @@ void start_resolve(data_t *instance)
                return (insert_sort(instance, 6));
            insert_sort(instance, 11);*/
     quick_sort_a(instance, instance->nb_enter);
+    opti_instr(&instance->st_instr);
+    print_instr(instance->st_instr);
 }

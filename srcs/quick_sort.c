@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 12:39:41 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/18 08:16:21 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/18 09:19:59 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,31 @@ void printlet(data_t instance)
     fprintf(stderr, "MAX=%d, MIN=%d, SIZE=%d\n", instance.max, instance.min, instance.nb_enter);
 }
 
+void opti_balance(data_t *instance, int rot, int aob, int len)
+{
+    if (rot >= len / 2)
+        rot -= len;
+    while (rot)
+    {
+        if (rot > 0)
+        {
+            if (aob == A)
+                rra(instance);
+            else
+                rrb(instance);
+            rot--;
+        }
+        else
+        {
+            if (aob == A)
+                ra(instance);
+            else
+                rb(instance);
+            rot++;
+        }
+    }
+}
+
 void sort_less_than_3(data_t *instance, int len)
 {
     if (len == 1)
@@ -41,21 +66,17 @@ void sort_less_than_3(data_t *instance, int len)
     { // 2 1 3 || 3 2 1 || 3 1 2
         if (instance->stack_a->next->value > instance->stack_a->next->next->value)
         { // 3 2 1
+            sa(instance);
             pb(instance);
             sa(instance);
-            ra(instance);
-            ra(instance);
             pa(instance);
-            rra(instance);
-            rra(instance);
+            sa(instance);
         }
         else if (instance->stack_a->value > instance->stack_a->next->next->value)
         { // 3 1 2
-            ra(instance);
+            sa(instance);
             pb(instance);
-            pb(instance);
-            rra(instance);
-            pa(instance);
+            sa(instance);
             pa(instance);
         }
         else
@@ -73,12 +94,10 @@ void sort_less_than_3(data_t *instance, int len)
         }
         else
         { // 2 3 1
-            ra(instance);
-            ra(instance);
             pb(instance);
-            rra(instance);
-            rra(instance);
+            sa(instance);
             pa(instance);
+            sa(instance);
         }
     }
 }
@@ -125,11 +144,10 @@ void push_less_than_3(data_t *instance, int len)
     { // 3 1 2 || 2 1 3
         if (instance->stack_b->value < instance->stack_b->next->next->value)
         { // 2 1 3
-            rb(instance);
+            pa(instance);
             sb(instance);
             pa(instance);
-            rrb(instance);
-            pa(instance);
+            sa(instance);
             pa(instance);
         }
         else
@@ -175,12 +193,6 @@ void quick_sort_b(data_t *instance, int len)
 
     if (is_sort(instance, B, descending, len))
     {
-        if (is_sort(instance, B, descending, instance->nb_enter + 1))
-        {
-            while (instance->stack_b)
-                pa(instance);
-            return;
-        }
         while (len--)
             pa(instance);
         return;
@@ -194,15 +206,11 @@ void quick_sort_b(data_t *instance, int len)
     {
         if (instance->stack_b->id >= len / 2)
             pa(instance);
-        else
-        {
+        else if (++rot)
             rb(instance);
-            rot++;
-        }
     }
     if (ft_lstsize(instance->stack_b) != len / 2)
-        while (rot--)
-            rrb(instance);
+        opti_balance(instance, rot, B, ft_lstsize(instance->stack_b));
     quick_sort_a(instance, len / 2 + len % 2);
     quick_sort_b(instance, len / 2);
 }
@@ -224,15 +232,11 @@ void quick_sort_a(data_t *instance, int len)
     {
         if (instance->stack_a->id < len / 2)
             pb(instance);
-        else
-        {
+        else if (++rot)
             ra(instance);
-            rot++;
-        }
     }
     if (ft_lstsize(instance->stack_a) != len / 2 + len % 2)
-        while (rot--)
-            rra(instance);
+        opti_balance(instance, rot, A, ft_lstsize(instance->stack_a));
     quick_sort_a(instance, len / 2 + len % 2);
     quick_sort_b(instance, len / 2);
 }

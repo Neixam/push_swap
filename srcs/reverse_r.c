@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:38:50 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/13 20:10:52 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/18 09:30:50 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void rra(data_t *instance)
     tmp->next = instance->stack_a;
     instance->stack_a = tmp;
     ant->next = 0;
-    write(1, "rra\n", 4);
+    ft_add_back(&instance->st_instr, RRA);
+    // write(1, "rra\n", 4);
 }
 
 void rrb(data_t *instance)
@@ -48,7 +49,8 @@ void rrb(data_t *instance)
     tmp->next = instance->stack_b;
     instance->stack_b = tmp;
     ant->next = 0;
-    write(1, "rrb\n", 4);
+    ft_add_back(&instance->st_instr, RRB);
+    // write(1, "rrb\n", 4);
 }
 
 void rrr(data_t *instance)
@@ -74,5 +76,6 @@ void rrr(data_t *instance)
     tmp->next = instance->stack_a;
     instance->stack_a = tmp;
     ant->next = 0;
-    write(1, "rrr\n", 4);
+    ft_add_back(&instance->st_instr, RRR);
+    // write(1, "rrr\n", 4);
 }
