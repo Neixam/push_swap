@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:37:14 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/18 14:16:26 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/23 15:04:53 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,12 @@ void pb(data_t *instance)
 int is_rotate_in(int val, int aob)
 {
     if ((aob == A && val == RA) ||
-        (aob == B && val == RB))
+        (aob == B && val == RB) ||
+        val == RR)
         return (RR);
     if ((aob == A && val == RRA) ||
-        (aob == B && val == RRB))
+        (aob == B && val == RRB) ||
+        val == RRR)
         return (RRR);
     return (0);
 }
@@ -56,7 +58,8 @@ int is_rotate_in(int val, int aob)
 int is_statement_in(int val, int aob)
 {
     if ((aob == A && val == SA) ||
-        (aob == B && val == SB))
+        (aob == B && val == SB) ||
+        val == SS)
         return (SS);
     if (val == PB || val == PA)
         return (val);

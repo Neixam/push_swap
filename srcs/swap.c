@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:36:13 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/18 10:20:24 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/23 20:31:29 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void sb(data_t *instance)
     instance->stack_b->id = instance->stack_b->next->id;
     instance->stack_b->next->id = tmp;
     ft_add_back(&instance->st_instr, SB);
-    // write(1, "sb\n", 3);
 }
 
 void ss(data_t *instance)
@@ -63,5 +62,4 @@ void ss(data_t *instance)
     instance->stack_b->id = instance->stack_b->next->id;
     instance->stack_b->next->id = tmp;
     ft_add_back(&instance->st_instr, SS);
-    // write(1, "ss\n", 3);
 }

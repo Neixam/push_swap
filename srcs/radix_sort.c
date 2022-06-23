@@ -6,12 +6,70 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 19:13:00 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/17 22:30:14 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/23 20:33:29 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "resolve.h"
 #include "operation.h"
+
+void push_less_than_3(data_t *instance, int len)
+{
+    if (len == 1)
+        return (pa(instance));
+    if (len == 2)
+    {
+        if (instance->stack_b->value < instance->stack_b->next->value)
+            sb(instance);
+        pa(instance);
+        return (pa(instance));
+    }
+    if (instance->stack_b->value < instance->stack_b->next->value)
+    {
+        if (instance->stack_b->next->value < instance->stack_b->next->next->value)
+        {
+            rb(instance);
+            sb(instance);
+            pa(instance);
+            pa(instance);
+            rrb(instance);
+            pa(instance);
+        }
+        else if (instance->stack_b->value > instance->stack_b->next->next->value)
+        {
+            sb(instance);
+            pa(instance);
+            pa(instance);
+            pa(instance);
+        }
+        else
+        {
+            rb(instance);
+            pa(instance);
+            pa(instance);
+            rrb(instance);
+            pa(instance);
+        }
+    }
+    else
+    {
+        if (instance->stack_b->value < instance->stack_b->next->next->value)
+        {
+            pa(instance);
+            sb(instance);
+            pa(instance);
+            sa(instance);
+            pa(instance);
+        }
+        else
+        {
+            pa(instance);
+            sb(instance);
+            pa(instance);
+            pa(instance);
+        }
+    }
+}
 
 int is_sort(data_t *instance, int aob, int (*cmp)(list_t *, list_t *), int len)
 {
@@ -50,27 +108,5 @@ void go_to(data_t *instance, int pos, int aob)
                 rrb(instance);
             pos++;
         }
-    }
-}
-
-void radix_sort(data_t *instance)
-{
-    int decal;
-    int i;
-
-    decal = 0;
-    while (((instance->nb_enter - 1) >> decal) > 0 && !is_sort(instance, A, ascending, instance->nb_enter))
-    {
-        i = 0;
-        while (i++ < instance->nb_enter && instance->stack_a)
-        {
-            if ((instance->stack_a->id >> decal) & 1)
-                ra(instance);
-            else
-                pb(instance);
-        }
-        while (instance->stack_b)
-            pa(instance);
-        decal++;
     }
 }

@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:40:14 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/18 08:16:30 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/23 20:32:33 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,9 @@ int find_value(list_t *lst, int val);
 void quick_sort_a(data_t *instance, int len);
 
 void quick_sort_b(data_t *instance, int len);
+
+void opti_balance(data_t *instance, int rot, int aob, int len);
+
+void push_less_than_3(data_t *instance, int len);
 
 #endif

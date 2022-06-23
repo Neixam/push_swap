@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:46:05 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/18 17:20:35 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/23 20:28:58 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,107 +23,66 @@ int is_resolve(data_t *instance)
     return (is_sort(instance, A, ascending, instance->nb_enter));
 }
 
-int find_rchunk(list_t *lst, int min, int max, int *ret)
+void push_all_last(data_t *instance)
 {
-    int nb;
+    int max;
 
-    if (!lst)
-        return (0);
-    nb = find_rchunk(lst->next, min, max, ret);
-    if (*ret)
-        return (nb);
-    if (lst->id >= min && lst->id < max)
-        *ret = 1;
-    return (nb + 1);
-}
-
-int find_chunk(list_t *lst, int min, int max)
-{
-    int nb;
-    int nb2;
-    int ret;
-
-    ret = 0;
-    nb2 = find_rchunk(lst, min, max, &ret);
-    nb = 0;
-    while (lst)
+    if (is_sort(instance, B, descending, 5))
     {
-        if (lst->id >= min && lst->id < max)
-            break;
-        nb++;
-        lst = lst->next;
+        while (instance->stack_b)
+            pa(instance);
+        return;
     }
-    if (nb < nb2)
-        return (nb);
-    else
-        return (-nb2);
+    max = 3;
+    while (max-- && ft_lstsize(instance->stack_b) > 3)
+    {
+        if (instance->stack_b->id >= 3)
+            pa(instance);
+        else
+            rb(instance);
+    }
+    while (max++ < 3 && ft_lstsize(instance->stack_b) > 3)
+    {
+        if (instance->stack_b->id >= 3)
+            pa(instance);
+        else
+            rrb(instance);
+    }
+    if (!is_sort(instance, A, ascending, 2))
+        sa(instance);
+    if (is_sort(instance, B, descending, 3))
+    {
+        while (instance->stack_b)
+            pa(instance);
+        return;
+    }
+    push_less_than_3(instance, 3);
 }
 
-int find_appro(list_t *lst, int val)
+void init_quick_sort(data_t *instance)
 {
-    int pos;
-    int valpos;
     int i;
+    int rot;
+    int len;
 
     i = 0;
-    pos = i;
-    valpos = lst->value;
-    while (lst)
+    rot = 0;
+    len = instance->nb_enter - 5;
+    while (i++ < instance->nb_enter)
     {
-        if (ft_abs(lst->value - val) < ft_abs(valpos - val))
+        if (instance->stack_a->id < 5)
         {
-            pos = i;
-            valpos = lst->value;
+            pb(instance);
+            rb(instance);
         }
-        i++;
-        lst = lst->next;
+        else if (instance->stack_a->id - 5 < len / 2 + len % 2)
+            pb(instance);
+        else if (++rot)
+            ra(instance);
     }
-    if (valpos > val)
-        pos++;
-    return (pos);
-}
-
-void setup_b(data_t *instance, int pushs)
-{
-    int min;
-    int max;
-    int pos;
-
-    if (pushs < 2)
-        return (pb(instance));
-    ft_lstmm(instance->stack_b, &min, &max);
-    if (instance->stack_a->value < min)
-        pos = find_value(instance->stack_b, min) + 1;
-    else if (instance->stack_a->value > max)
-        pos = find_value(instance->stack_b, max);
-    else
-        pos = find_appro(instance->stack_b, instance->stack_a->value);
-    if (pos >= pushs / 2)
-        pos -= pushs;
-    go_to(instance, pos, B);
-    pb(instance);
-}
-
-void insert_sort(data_t *instance, int part)
-{
-    int size_chunk;
-    int pushs;
-    int num_chunk;
-
-    size_chunk = instance->nb_enter / part;
-    num_chunk = 0;
-    pushs = 0;
-    while (instance->stack_a)
-    {
-        go_to(instance, find_chunk(instance->stack_a, size_chunk * num_chunk, size_chunk * (num_chunk + 1)), A);
-        setup_b(instance, pushs);
-        pushs++;
-        if (pushs % size_chunk == 0)
-            num_chunk++;
-    }
-    go_to(instance, find_value(instance->stack_b, instance->max), B);
-    while (instance->stack_b)
-        pa(instance);
+    quick_sort_a(instance, rot);
+    quick_sort_b(instance, len - rot);
+    push_all_last(instance);
 }
 
 void start_resolve(data_t *instance)
@@ -131,13 +90,8 @@ void start_resolve(data_t *instance)
     if (is_resolve(instance))
         return;
     if (instance->nb_enter <= 5)
-	{
         return (resolve_less_than_5(instance));
-	}
-	if (instance->nb_enter <= 100)
-    	insert_sort(instance, 6);
-	else
-    	quick_sort_a(instance, instance->nb_enter);
+    init_quick_sort(instance);
     opti_instr(&instance->st_instr);
     print_instr(instance->st_instr);
 }
