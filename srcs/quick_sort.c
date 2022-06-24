@@ -84,31 +84,56 @@ void refresh_med(list_t *lst, int len)
     }
 }
 
+void	insert_good(data_t *instance, int *rot)
+{
+	int len;
+	int i;
+
+	if (!instance->stack_a)
+		return (pa(instance));
+	len = ft_lstsize(instance->stack_a);
+	i = len / 2;
+	while (i-- && instance->stack_a->value < instance->stack_b->value)
+	{
+		ra(instance);
+		(*rot)++;
+	}
+	while (i++ < len && instance->stack_a->value < instance->stack_b->value)
+	{
+		rra(instance);
+		(*rot)--;
+	}
+	pa(instance);
+}
+
+void	push_len_a(data_t *instance, int len)
+{
+	while (len--)
+		pa(instance);
+}
+
 void quick_sort_b(data_t *instance, int len)
 {
     int i;
     int rot;
+	int rot2;
 
     if (is_sort(instance, B, descending, len))
-    {
-        while (len--)
-            pa(instance);
-        return;
-    }
+        return (push_len_a(instance, len));
     if (len <= 3)
         return (push_less_than_3(instance, len));
     refresh_med(instance->stack_b, len);
     i = 0;
     rot = 0;
+	rot2 = 0;
     while (i++ < len)
-    {
         if (instance->stack_b->id >= len / 2 + len % 2)
-            pa(instance);
+			insert_good(instance, &rot2);
         else if (++rot)
             rb(instance);
-    }
     if (ft_lstsize(instance->stack_b) != rot)
         opti_balance(instance, rot, B, ft_lstsize(instance->stack_b));
+	opti_balance(instance, rot2, A, ft_lstsize(instance->stack_a));
     quick_sort_a(instance, len - rot);
     quick_sort_b(instance, rot);
 }
