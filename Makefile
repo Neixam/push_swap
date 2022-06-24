@@ -6,7 +6,7 @@
 #    By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/29 17:08:30 by ambouren          #+#    #+#              #
-#    Updated: 2022/06/24 11:17:25 by ambouren         ###   ########.fr        #
+#    Updated: 2022/06/24 13:55:12 by ambouren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ SRC_CHCK=	parsing.c \
 			data.c \
 			list.c \
 			get_next_line.c \
+			get_next_line_utils.c \
 			checker.c \
 			swap.c \
 			push.c \
@@ -61,7 +62,8 @@ SRC_CHCK=	parsing.c \
 			radix_sort.c \
 			comparing.c \
 			opti_instr.c \
-			utils.c
+			utils.c \
+			optimization.c
 DEP		=	$(addprefix $(DEP_PATH), $(SRC:.c=.d)) \
 			$(addprefix $(DEP_PATH), $(SRC_CHCK:.c=.d))
 OBJ		=	$(addprefix $(OBJ_PATH), $(SRC:.c=.o))

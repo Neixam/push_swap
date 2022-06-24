@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 18:11:21 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/18 17:22:21 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/24 14:13:46 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 #include "utils.h"
 #include "parsing.h"
 #include "resolve.h"
-#include <stdio.h>
 #include "list.h"
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	data_t instance;
+	data_t	instance;
 
 	instance = init_data();
 	if (ac < 1)
