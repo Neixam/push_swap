@@ -6,12 +6,12 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 21:27:33 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/13 17:13:32 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/24 09:26:39 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __LIST_H__
-#define __LIST_H__
+#ifndef LIST_H
+#define LIST_H
 
 typedef struct list_s
 {

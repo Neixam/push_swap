@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 18:44:16 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/18 11:00:06 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/24 10:51:00 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,22 @@ int ft_atoi(char *s, int *val)
 {
 	long ret;
 	int neg;
+	int test;
 
 	neg = 1;
 	if (*s == '+' || *s == '-')
 		if (*(s++) == '-')
 			neg = -1;
-	if ((*s <= 'z' && *s >= 'a') || (*s <= 'Z' && *s >= 'A'))
-		return (1);
 	ret = 0;
+	test = 0;
 	while (*s <= '9' && *s >= '0')
 	{
-		if ((neg < 0 && ret * neg < -2147483648) ||
-			(neg > 0 && ret > 2147483647))
+		test = 1;
+		if (ret * neg < -2147483648 || ret * neg > 2147483647)
 			return (1);
 		ret = ret * 10 + *(s++) - '0';
 	}
-	if ((*s <= 'z' && *s >= 'a') || (*s <= 'Z' && *s >= 'A'))
+	if (*s || !test)
 		return (1);
 	*val = ret * neg;
 	return (0);
@@ -96,10 +96,20 @@ int add_all(list_t **stack, char **arg)
 	return (0);
 }
 
+int ft_panic(char **arg)
+{
+	int i;
+
+	i = 0;
+	while (arg[i])
+		free(arg[i++]);
+	free(arg);
+	return (1);
+}
+
 int parsing(int ac, char **av, data_t *instance)
 {
 	int i;
-	int j;
 	char **arg;
 
 	i = 0;
@@ -108,15 +118,9 @@ int parsing(int ac, char **av, data_t *instance)
 		arg = ft_split(av[i], ' ');
 		if (!arg)
 			return (1);
-		if (add_all(&instance->stack_a, arg))
-		{
-			free(arg);
-			return (1);
-		}
-		j = 0;
-		while (arg[j])
-			free(arg[j++]);
-		free(arg);
+		if (!*arg || add_all(&instance->stack_a, arg))
+			return (ft_panic(arg));
+		ft_panic(arg);
 	}
 	if (ft_isdup(instance))
 		return (1);

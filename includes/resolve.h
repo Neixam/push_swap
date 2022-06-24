@@ -6,12 +6,12 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:40:14 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/23 20:32:33 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/24 09:26:23 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __RESOLVE_H__
-#define __RESOLVE_H__
+#ifndef RESOLVE_H
+#define RESOLVE_H
 
 #include "data.h"
 

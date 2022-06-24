@@ -6,15 +6,17 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:32:19 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/18 10:35:59 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/24 11:26:40 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __OPERATION_H__
-#define __OPERATION_H__
+#ifndef OPERATION_H
+#define OPERATION_H
 #include "data.h"
 #define A 1
 #define B 2
+
+typedef void (*instrs_t)(data_t *);
 
 typedef enum intr_e
 {
@@ -53,5 +55,10 @@ int is_statement(int val);
 
 void opti_instr(list_t **instrs);
 void print_instr(list_t *l);
+void delete_instr(list_t **instrs, list_t **todel);
+void opti_rotate(list_t **instrs, list_t **pos, int flag);
+void opti_double(list_t **instrs, list_t **pos, int flag);
+void opti_swap(list_t **instrs, list_t **pos, int flag);
+void opti_push(list_t **instrs, list_t **pos, int flag);
 
 #endif

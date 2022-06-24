@@ -6,12 +6,12 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 18:53:39 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/18 10:29:04 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/24 09:26:32 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __UTILS_H__
-#define __UTILS_H__
+#ifndef UTILS_H
+#define UTILS_H
 
 #include <stddef.h>
 

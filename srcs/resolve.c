@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:46:05 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/23 20:28:58 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/24 10:28:39 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,39 +23,33 @@ int is_resolve(data_t *instance)
     return (is_sort(instance, A, ascending, instance->nb_enter));
 }
 
+void push_all_a(data_t *instance)
+{
+    while (instance->stack_b)
+        pa(instance);
+}
+
 void push_all_last(data_t *instance)
 {
     int max;
 
     if (is_sort(instance, B, descending, 5))
-    {
-        while (instance->stack_b)
-            pa(instance);
-        return;
-    }
+        return (push_all_a(instance));
     max = 3;
     while (max-- && ft_lstsize(instance->stack_b) > 3)
-    {
         if (instance->stack_b->id >= 3)
             pa(instance);
         else
             rb(instance);
-    }
     while (max++ < 3 && ft_lstsize(instance->stack_b) > 3)
-    {
         if (instance->stack_b->id >= 3)
             pa(instance);
         else
             rrb(instance);
-    }
     if (!is_sort(instance, A, ascending, 2))
         sa(instance);
     if (is_sort(instance, B, descending, 3))
-    {
-        while (instance->stack_b)
-            pa(instance);
-        return;
-    }
+        return (push_all_a(instance));
     push_less_than_3(instance, 3);
 }
 
@@ -90,8 +84,9 @@ void start_resolve(data_t *instance)
     if (is_resolve(instance))
         return;
     if (instance->nb_enter <= 5)
-        return (resolve_less_than_5(instance));
-    init_quick_sort(instance);
+        resolve_less_than_5(instance);
+    else
+        init_quick_sort(instance);
     opti_instr(&instance->st_instr);
     print_instr(instance->st_instr);
 }

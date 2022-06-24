@@ -6,11 +6,12 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:36:13 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/23 20:31:29 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/24 10:23:37 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operation.h"
+
 void sa(data_t *instance)
 {
     int tmp;
@@ -24,7 +25,6 @@ void sa(data_t *instance)
     instance->stack_a->id = instance->stack_a->next->id;
     instance->stack_a->next->id = tmp;
     ft_add_back(&instance->st_instr, SA);
-    // write(1, "sa\n", 3);
 }
 
 void sb(data_t *instance)

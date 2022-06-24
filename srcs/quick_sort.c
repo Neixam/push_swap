@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 12:39:41 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/23 20:33:58 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/24 09:59:39 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,40 +47,14 @@ void sort_less_than_3(data_t *instance, int len)
     if (len == 2)
         return (sa(instance));
     if (instance->stack_a->value > instance->stack_a->next->value)
+        sa(instance);
+    if (!is_sort(instance, A, ascending, 3))
     {
-        if (instance->stack_a->next->value > instance->stack_a->next->next->value)
-        {
+        pb(instance);
+        sa(instance);
+        pa(instance);
+        if (instance->stack_a->value > instance->stack_a->next->value)
             sa(instance);
-            pb(instance);
-            sa(instance);
-            pa(instance);
-            sa(instance);
-        }
-        else if (instance->stack_a->value > instance->stack_a->next->next->value)
-        {
-            sa(instance);
-            pb(instance);
-            sa(instance);
-            pa(instance);
-        }
-        else
-            sa(instance);
-    }
-    else
-    {
-        if (instance->stack_a->value < instance->stack_a->next->next->value)
-        {
-            pb(instance);
-            sa(instance);
-            pa(instance);
-        }
-        else
-        {
-            pb(instance);
-            sa(instance);
-            pa(instance);
-            sa(instance);
-        }
     }
 }
 
