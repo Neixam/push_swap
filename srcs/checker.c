@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 11:11:15 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/24 11:35:46 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/24 11:40:39 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,10 @@ int read_instr(data_t *instance)
         if (!line)
             return (0);
         ret = parse_instr(line);
+        free(line);
         if (ret == -1)
             return (1);
         instrs[ret](instance);
-        free(line);
     }
 }
 
