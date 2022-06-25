@@ -11,25 +11,25 @@
 /* ************************************************************************** */
 
 #ifndef LIST_H
-#define LIST_H
+# define LIST_H
 
-typedef struct list_s
+typedef struct s_list
 {
-    int value;
-    int id;
-    struct list_s *next;
-} list_t;
+	int				value;
+	int				id;
+	struct s_list	*next;
+}					t_list;
 
-list_t *ft_new_cell(int value);
+t_list	*ft_new_cell(int value);
 
-int ft_add_back(list_t **lst, int value);
+int		ft_add_back(t_list **lst, int value);
 
-int ft_add_head(list_t **lst, int value);
+int		ft_add_head(t_list **lst, int value);
 
-void ft_destroy_lst(list_t **lst);
+void	ft_destroy_lst(t_list **lst);
 
-int ft_lstsize(list_t *lst);
+int		ft_lstsize(t_list *lst);
 
-int ft_lstmm(list_t *lst, int *min, int *max);
+int		ft_lstmm(t_list *lst, int *min, int *max);
 
 #endif

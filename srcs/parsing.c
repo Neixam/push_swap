@@ -16,11 +16,11 @@
 #include "list.h"
 #include <stdlib.h>
 
-int ft_atoi(char *s, int *val)
+int	ft_atoi(char *s, int *val)
 {
-	long ret;
-	int neg;
-	int test;
+	long	ret;
+	int		neg;
+	int		test;
 
 	neg = 1;
 	if (*s == '+' || *s == '-')
@@ -41,10 +41,10 @@ int ft_atoi(char *s, int *val)
 	return (0);
 }
 
-int ft_isdup(data_t *instance)
+int	ft_isdup(t_data *instance)
 {
-	list_t *tmp;
-	list_t *a;
+	t_list	*tmp;
+	t_list	*a;
 
 	a = instance->stack_a;
 	instance->min = instance->stack_a->value;
@@ -68,11 +68,11 @@ int ft_isdup(data_t *instance)
 	return (0);
 }
 
-int add_all(list_t **stack, char **arg)
+int	add_all(t_list **stack, char **arg)
 {
-	int value;
-	int id;
-	list_t *tmp;
+	int		value;
+	int		id;
+	t_list	*tmp;
 
 	while (*arg)
 	{
@@ -96,9 +96,9 @@ int add_all(list_t **stack, char **arg)
 	return (0);
 }
 
-int ft_panic(char **arg)
+int	ft_panic(char **arg)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (arg[i])
@@ -107,10 +107,10 @@ int ft_panic(char **arg)
 	return (1);
 }
 
-int parsing(int ac, char **av, data_t *instance)
+int	parsing(int ac, char **av, t_data *instance)
 {
-	int i;
-	char **arg;
+	int		i;
+	char	**arg;
 
 	i = 0;
 	while (++i < ac)

@@ -13,16 +13,16 @@
 #include "data.h"
 #include "list.h"
 
-void	ft_destroy_data(data_t *data)
+void	ft_destroy_data(t_data *data)
 {
 	ft_destroy_lst(&data->stack_a);
 	ft_destroy_lst(&data->stack_b);
 	ft_destroy_lst(&data->st_instr);
 }
 
-data_t	init_data(void)
+t_data	init_data(void)
 {
-	data_t	ret;
+	t_data	ret;
 
 	ret.stack_a = 0;
 	ret.stack_b = 0;

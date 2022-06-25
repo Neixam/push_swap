@@ -13,12 +13,12 @@
 #include "list.h"
 #include <unistd.h>
 
-int	descending(list_t *n1, list_t *n2)
+int	descending(t_list *n1, t_list *n2)
 {
 	return (n1->value > n2->value);
 }
 
-int	ascending(list_t *n1, list_t *n2)
+int	ascending(t_list *n1, t_list *n2)
 {
 	return (n1->value < n2->value);
 }

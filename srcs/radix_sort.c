@@ -13,64 +13,64 @@
 #include "resolve.h"
 #include "operation.h"
 
-void push_less_than_3(data_t *instance, int len)
+void	push_less_than_3(t_data *instance, int len)
 {
-    if (len == 1)
-        return (pa(instance));
-    if (len == 2)
-    {
-        if (instance->stack_b->value < instance->stack_b->next->value)
-            sb(instance);
-        pa(instance);
-        return (pa(instance));
-    }
-    if (instance->stack_b->value < instance->stack_b->next->value)
-        sb(instance);
-    pa(instance);
-    if (instance->stack_b->value < instance->stack_b->next->value)
-        sb(instance);
-    pa(instance);
-    if (instance->stack_a->value > instance->stack_a->next->value)
-        sa(instance);
-    pa(instance);
+	if (len == 1)
+		return (pa(instance));
+	if (len == 2)
+	{
+		if (instance->stack_b->value < instance->stack_b->next->value)
+			sb(instance);
+		pa(instance);
+		return (pa(instance));
+	}
+	if (instance->stack_b->value < instance->stack_b->next->value)
+		sb(instance);
+	pa(instance);
+	if (instance->stack_b->value < instance->stack_b->next->value)
+		sb(instance);
+	pa(instance);
+	if (instance->stack_a->value > instance->stack_a->next->value)
+		sa(instance);
+	pa(instance);
 }
 
-int is_sort(data_t *instance, int aob, int (*cmp)(list_t *, list_t *), int len)
+int	is_sort(t_data *instance, int aob, int (*cmp)(t_list *, t_list *), int len)
 {
-    list_t *tmp;
+	t_list	*tmp;
 
-    if (aob == A)
-        tmp = instance->stack_a;
-    else
-        tmp = instance->stack_b;
-    while (tmp && tmp->next && --len > 0)
-    {
-        if (!cmp(tmp, tmp->next))
-            return (0);
-        tmp = tmp->next;
-    }
-    return (1);
+	if (aob == A)
+		tmp = instance->stack_a;
+	else
+		tmp = instance->stack_b;
+	while (tmp && tmp->next && --len > 0)
+	{
+		if (!cmp(tmp, tmp->next))
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
 }
 
-void go_to(data_t *instance, int pos, int aob)
+void	go_to(t_data *instance, int pos, int aob)
 {
-    while (pos != 0)
-    {
-        if (pos > 0)
-        {
-            if (aob == A)
-                ra(instance);
-            else
-                rb(instance);
-            pos--;
-        }
-        else
-        {
-            if (aob == A)
-                rra(instance);
-            else
-                rrb(instance);
-            pos++;
-        }
-    }
+	while (pos != 0)
+	{
+		if (pos > 0)
+		{
+			if (aob == A)
+				ra(instance);
+			else
+				rb(instance);
+			pos--;
+		}
+		else
+		{
+			if (aob == A)
+				rra(instance);
+			else
+				rrb(instance);
+			pos++;
+		}
+	}
 }

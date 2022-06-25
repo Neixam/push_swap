@@ -11,23 +11,21 @@
 /* ************************************************************************** */
 
 #ifndef DATA_H
-#define DATA_H
-#include "list.h"
+# define DATA_H
+# include "list.h"
 
-typedef struct data_s
+typedef struct s_data
 {
-	list_t *stack_a;
-	list_t *stack_b;
-	list_t *st_instr;
-	int nb_enter;
-	int max;
-	int min;
-} data_t;
+	t_list	*stack_a;
+	t_list	*stack_b;
+	t_list	*st_instr;
+	int		nb_enter;
+	int		max;
+	int		min;
+}			t_data;
 
-data_t init_data(void);
+t_data	init_data(void);
 
-void ft_destroy_data(data_t *data);
-
-int creat_radix_tab(data_t *data);
+void	ft_destroy_data(t_data *data);
 
 #endif

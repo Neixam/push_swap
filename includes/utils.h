@@ -11,22 +11,21 @@
 /* ************************************************************************** */
 
 #ifndef UTILS_H
-#define UTILS_H
+# define UTILS_H
+# include <stddef.h>
 
-#include <stddef.h>
+int		print_error(void);
 
-int print_error(void);
+size_t	ft_strlen(const char *s1);
 
-size_t ft_strlen(const char *s1);
+char	*ft_strdup(const char *s1);
 
-char *ft_strdup(const char *s1);
+char	**ft_split(char const *s, char c);
 
-char **ft_split(char const *s, char c);
+int		ft_isblank(int c);
 
-int ft_isblank(int c);
+long	ft_abs(int n);
 
-long ft_abs(int n);
-
-void ft_putstr(char *s);
+void	ft_putstr(char *s);
 
 #endif

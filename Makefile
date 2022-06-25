@@ -47,7 +47,8 @@ SRC		=	main.c \
 			quick_sort.c \
 			comparing.c \
 			opti_instr.c \
-			optimization.c
+			optimization.c \
+			sort_b.c
 SRC_CHCK=	parsing.c \
 			data.c \
 			list.c \

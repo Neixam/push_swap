@@ -18,7 +18,7 @@
 
 int	main(int ac, char **av)
 {
-	data_t	instance;
+	t_data	instance;
 
 	instance = init_data();
 	if (ac < 1)

@@ -27,7 +27,7 @@ int	ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
-void	init_instr(instrs_t instrs[11])
+void	init_instr(t_instrs instrs[11])
 {
 	instrs[SA] = sa;
 	instrs[SB] = sb;
@@ -42,7 +42,7 @@ void	init_instr(instrs_t instrs[11])
 	instrs[RRR] = rrr;
 }
 
-instr_t	parse_instr(char *line)
+t_instr	parse_instr(char *line)
 {
 	if (!ft_strcmp(line, "sa\n"))
 		return (SA);
@@ -69,10 +69,10 @@ instr_t	parse_instr(char *line)
 	return (-1);
 }
 
-int	read_instr(data_t *instance)
+int	read_instr(t_data *instance)
 {
 	char		*line;
-	instrs_t	instrs[11];
+	t_instrs	instrs[11];
 	int			ret;
 
 	init_instr(instrs);
@@ -91,7 +91,7 @@ int	read_instr(data_t *instance)
 
 int	main(int ac, char **av)
 {
-	data_t	instance;
+	t_data	instance;
 
 	instance = init_data();
 	if (ac < 1)

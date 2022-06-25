@@ -13,17 +13,18 @@
 #include "resolve.h"
 #include "operation.h"
 
-void resolve_less_than_3(data_t *instance)
+void	resolve_less_than_3(t_data *instance)
 {
 	if (is_sort(instance, A, ascending, instance->nb_enter))
-		return;
+		return ;
 	if (instance->nb_enter == 2)
 		return (sa(instance));
 	if (instance->stack_a->value > instance->stack_a->next->value)
 	{
 		if (instance->stack_a->value < instance->stack_a->next->next->value)
 			return (sa(instance));
-		if (instance->stack_a->next->value < instance->stack_a->next->next->value)
+		if (instance->stack_a->next->value
+			< instance->stack_a->next->next->value)
 			return (ra(instance));
 		sa(instance);
 		return (rra(instance));
@@ -34,9 +35,9 @@ void resolve_less_than_3(data_t *instance)
 	ra(instance);
 }
 
-int find_value(list_t *lst, int val)
+int	find_value(t_list *lst, int val)
 {
-	int rotate;
+	int	rotate;
 
 	rotate = 0;
 	while (lst)
@@ -49,16 +50,16 @@ int find_value(list_t *lst, int val)
 	return (-1);
 }
 
-void push_pos(data_t *instance, int pos)
+void	push_pos(t_data *instance, int pos)
 {
 	go_to(instance, pos, A);
 	pb(instance);
 }
 
-void insert_borne(data_t *instance)
+void	insert_borne(t_data *instance)
 {
-	int min;
-	int max;
+	int	min;
+	int	max;
 
 	if (instance->nb_enter == 5)
 	{
@@ -73,7 +74,7 @@ void insert_borne(data_t *instance)
 	push_pos(instance, min);
 }
 
-void resolve_less_than_5(data_t *instance)
+void	resolve_less_than_5(t_data *instance)
 {
 	if (instance->nb_enter < 4)
 		return (resolve_less_than_3(instance));

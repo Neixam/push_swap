@@ -13,7 +13,7 @@
 #include "list.h"
 #include <stdlib.h>
 
-int	ft_lstsize(list_t *lst)
+int	ft_lstsize(t_list *lst)
 {
 	int	len;
 
@@ -26,11 +26,11 @@ int	ft_lstsize(list_t *lst)
 	return (len);
 }
 
-list_t	*ft_new_cell(int value)
+t_list	*ft_new_cell(int value)
 {
-	list_t	*ret;
+	t_list	*ret;
 
-	ret = (list_t *)malloc(sizeof(list_t));
+	ret = (t_list *)malloc(sizeof(t_list));
 	if (!ret)
 		return (NULL);
 	ret->value = value;
@@ -39,9 +39,9 @@ list_t	*ft_new_cell(int value)
 	return (ret);
 }
 
-int	ft_add_back(list_t **lst, int value)
+int	ft_add_back(t_list **lst, int value)
 {
-	list_t	*head;
+	t_list	*head;
 
 	if (!lst)
 		return (1);
@@ -61,9 +61,9 @@ int	ft_add_back(list_t **lst, int value)
 	return (0);
 }
 
-int	ft_add_head(list_t **lst, int value)
+int	ft_add_head(t_list **lst, int value)
 {
-	list_t	*head;
+	t_list	*head;
 
 	if (!lst)
 		return (1);
@@ -75,7 +75,7 @@ int	ft_add_head(list_t **lst, int value)
 	return (0);
 }
 
-void	ft_destroy_lst(list_t **lst)
+void	ft_destroy_lst(t_list **lst)
 {
 	if (!lst || !*lst)
 		return ;

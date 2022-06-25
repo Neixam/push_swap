@@ -11,36 +11,39 @@
 /* ************************************************************************** */
 
 #ifndef RESOLVE_H
-#define RESOLVE_H
+# define RESOLVE_H
 
-#include "data.h"
+# include "data.h"
 
-void start_resolve(data_t *instance);
+void	start_resolve(t_data *instance);
 
-void resolve_less_than_3(data_t *instance);
+void	resolve_less_than_3(t_data *instance);
 
-void resolve_less_than_5(data_t *instance);
+void	resolve_less_than_5(t_data *instance);
 
-void push_pos(data_t *instance, int pos);
+void	push_pos(t_data *instance, int pos);
 
-void radix_sort(data_t *instance);
+void	radix_sort(t_data *instance);
 
-int is_sort(data_t *instance, int aob, int (*cmp)(list_t *, list_t *), int len);
+int		is_sort(t_data *instance, int aob,
+			int (*cmp)(t_list *, t_list *), int len);
 
-int descending(list_t *n1, list_t *n2);
+int		descending(t_list *n1, t_list *n2);
 
-int ascending(list_t *n1, list_t *n2);
+int		ascending(t_list *n1, t_list *n2);
 
-void go_to(data_t *instance, int pos, int aob);
+void	go_to(t_data *instance, int pos, int aob);
 
-int find_value(list_t *lst, int val);
+int		find_value(t_list *lst, int val);
 
-void quick_sort_a(data_t *instance, int len);
+void	quick_sort_a(t_data *instance, int len);
 
-void quick_sort_b(data_t *instance, int len);
+void	quick_sort_b(t_data *instance, int len);
 
-void opti_balance(data_t *instance, int rot, int aob, int len);
+void	opti_balance(t_data *instance, int rot, int aob, int len);
 
-void push_less_than_3(data_t *instance, int len);
+void	refresh_med(t_list *lst, int len);
+
+void	push_less_than_3(t_data *instance, int len);
 
 #endif

@@ -11,10 +11,9 @@
 /* ************************************************************************** */
 
 #ifndef PARSING_H
-#define PARSING_H
+# define PARSING_H
+# include "data.h"
 
-#include "data.h"
-
-int parsing(int ac, char **av, data_t *instance);
+int	parsing(int ac, char **av, t_data *instance);
 
 #endif
