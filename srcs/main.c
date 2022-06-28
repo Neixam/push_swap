@@ -21,8 +21,8 @@ int	main(int ac, char **av)
 	t_data	instance;
 
 	instance = init_data();
-	if (ac < 1)
-		return (print_error());
+	if (ac <= 1)
+		return (0);
 	if (parsing(ac, av, &instance))
 	{
 		ft_destroy_data(&instance);
