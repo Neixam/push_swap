@@ -6,11 +6,12 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:38:50 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/18 09:30:50 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/26 15:23:25 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operation.h"
+#include <stdlib.h>
 
 void	rra(t_data *instance)
 {
@@ -28,7 +29,8 @@ void	rra(t_data *instance)
 	tmp->next = instance->stack_a;
 	instance->stack_a = tmp;
 	ant->next = 0;
-	ft_add_back(&instance->st_instr, RRA);
+	if (ft_add_back(&instance->st_instr, RRA))
+		exit(1);
 }
 
 void	rrb(t_data *instance)
@@ -47,7 +49,8 @@ void	rrb(t_data *instance)
 	tmp->next = instance->stack_b;
 	instance->stack_b = tmp;
 	ant->next = 0;
-	ft_add_back(&instance->st_instr, RRB);
+	if (ft_add_back(&instance->st_instr, RRB))
+		exit(1);
 }
 
 void	rrr(t_data *instance)
@@ -73,5 +76,6 @@ void	rrr(t_data *instance)
 	tmp->next = instance->stack_a;
 	instance->stack_a = tmp;
 	ant->next = 0;
-	ft_add_back(&instance->st_instr, RRR);
+	if (ft_add_back(&instance->st_instr, RRR))
+		exit(1);
 }

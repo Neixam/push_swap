@@ -6,11 +6,12 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:36:13 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/24 10:23:37 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/26 15:23:07 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operation.h"
+#include <stdlib.h>
 
 void	sa(t_data *instance)
 {
@@ -24,7 +25,8 @@ void	sa(t_data *instance)
 	tmp = instance->stack_a->id;
 	instance->stack_a->id = instance->stack_a->next->id;
 	instance->stack_a->next->id = tmp;
-	ft_add_back(&instance->st_instr, SA);
+	if (ft_add_back(&instance->st_instr, SA))
+		exit(1);
 }
 
 void	sb(t_data *instance)
@@ -39,7 +41,8 @@ void	sb(t_data *instance)
 	tmp = instance->stack_b->id;
 	instance->stack_b->id = instance->stack_b->next->id;
 	instance->stack_b->next->id = tmp;
-	ft_add_back(&instance->st_instr, SB);
+	if (ft_add_back(&instance->st_instr, SB))
+		exit(1);
 }
 
 void	ss(t_data *instance)
@@ -61,5 +64,6 @@ void	ss(t_data *instance)
 	tmp = instance->stack_b->id;
 	instance->stack_b->id = instance->stack_b->next->id;
 	instance->stack_b->next->id = tmp;
-	ft_add_back(&instance->st_instr, SS);
+	if (ft_add_back(&instance->st_instr, SS))
+		exit(1);
 }

@@ -6,12 +6,13 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:37:14 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/23 15:04:53 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/26 15:20:38 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operation.h"
 #include "list.h"
+#include <stdlib.h>
 
 void	pa(t_data *instance)
 {
@@ -23,7 +24,8 @@ void	pa(t_data *instance)
 	instance->stack_b = instance->stack_b->next;
 	tmp->next = instance->stack_a;
 	instance->stack_a = tmp;
-	ft_add_back(&instance->st_instr, PA);
+	if (ft_add_back(&instance->st_instr, PA))
+		exit(1);
 }
 
 void	pb(t_data *instance)
@@ -36,7 +38,8 @@ void	pb(t_data *instance)
 	instance->stack_a = instance->stack_a->next;
 	tmp->next = instance->stack_b;
 	instance->stack_b = tmp;
-	ft_add_back(&instance->st_instr, PB);
+	if (ft_add_back(&instance->st_instr, PB))
+		exit(1);
 }
 
 int	is_rotate_in(int val, int aob)

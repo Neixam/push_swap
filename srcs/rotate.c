@@ -6,11 +6,12 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:38:04 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/18 11:45:21 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/26 15:21:39 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operation.h"
+#include <stdlib.h>
 
 void	ra(t_data *instance)
 {
@@ -24,7 +25,8 @@ void	ra(t_data *instance)
 	tmp->next = instance->stack_a;
 	instance->stack_a = instance->stack_a->next;
 	tmp2->next = 0;
-	ft_add_back(&instance->st_instr, RA);
+	if (ft_add_back(&instance->st_instr, RA))
+		exit(1);
 }
 
 void	rb(t_data *instance)
@@ -39,7 +41,8 @@ void	rb(t_data *instance)
 	tmp->next = instance->stack_b;
 	instance->stack_b = instance->stack_b->next;
 	tmp2->next = 0;
-	ft_add_back(&instance->st_instr, RB);
+	if (ft_add_back(&instance->st_instr, RB))
+		exit(1);
 }
 
 void	rr(t_data *instance)
@@ -61,7 +64,8 @@ void	rr(t_data *instance)
 	tmp->next = instance->stack_a;
 	instance->stack_a = instance->stack_a->next;
 	tmp2->next = 0;
-	ft_add_back(&instance->st_instr, RR);
+	if (ft_add_back(&instance->st_instr, RR))
+		exit(1);
 }
 
 int	is_rotate(int val)

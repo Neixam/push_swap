@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 11:11:15 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/24 14:09:52 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/29 08:21:15 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ int	main(int ac, char **av)
 	t_data	instance;
 
 	instance = init_data();
-	if (ac < 1)
-		return (print_error());
+	if (ac <= 1)
+		return (0);
 	if (parsing(ac, av, &instance))
 	{
 		ft_destroy_data(&instance);

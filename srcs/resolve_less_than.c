@@ -6,7 +6,7 @@
 /*   By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 07:53:26 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/23 20:30:23 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/26 15:33:05 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ void	resolve_less_than_5(t_data *instance)
 		return (resolve_less_than_3(instance));
 	insert_borne(instance);
 	resolve_less_than_3(instance);
-	pa(instance);
-	pa(instance);
-	ra(instance);
+	while (instance->stack_b)
+		pa(instance);
+	if (instance->nb_enter == 5)
+		ra(instance);
 }
